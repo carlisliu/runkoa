@@ -6,7 +6,8 @@ var fs = require('fs')
 var debug = require('debug')('runkoa')
 var path = require('path')
 
-var is_npm_v3 = /^3/.test(require('child_process').execSync('npm -v').toString())
+var npmExecPath = path.resolve(path.dirname(process.execPath), 'npm')
+var is_npm_v3 = /^3/.test(require('child_process').execSync(npmExecPath + ' -v').toString())
 
 /**
   cli加载的preset是一样的
