@@ -8,7 +8,7 @@
 
 它是[koa-generator](https://github.com/17koa/koa-generator)的核心组件
 
-- 暂时不支持window
+- 暂时不支持Windows
 
 ## 依赖
 
@@ -20,6 +20,7 @@
 
 ## Features
 
+- if use node v7.x，runkoa is an alias with `node --harmony-async-await`
 - 不需要了解babel即可使用koa2+async组合
 - 对koa项目代码无入侵，启动时入口处理而已
 - 支持koa@2.x里的3种异步调用方式，无需其他，完美支持
@@ -167,6 +168,8 @@ runkoa  app.js
 
 ## 版本历史
 
+- 1.5.4 fix #6 #12 #13
+- 1.5.3 测试办法，请不要用
 - v1.5.1 add module-export-default && npm3 + npm2 && ci support
 - v1.3.1 更新pm2部署和faq出错的2个问题，另外在cli和模块上都已经测试过了，在koa-generator上已作为核心模块使用，欢迎使用和反馈
 - v1.1.0 实现可编程调用
@@ -174,7 +177,7 @@ runkoa  app.js
 
 ## 欢迎fork和反馈
 
-- write by `i5ting` shiren1118@126.com
+- write by `i5ting` i5ting@126.com
 
 如有建议或意见，请在issue提问或邮件
 

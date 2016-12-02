@@ -1,8 +1,9 @@
 'use strict';
-   
+
 require("babel-polyfill")
 
 var fs = require('fs')
+var debug = require('debug')('runkoa')
 var path = require('path')
 
 var is_npm_v3 = /^3/.test(require('child_process').execSync('npm -v').toString())
@@ -15,7 +16,7 @@ var is_npm_v3 = /^3/.test(require('child_process').execSync('npm -v').toString()
   - npm 3是它的上级模块
   - npm 2是当前文件目录下的node_modules\
  *
- */ 
+ */
 module.exports = function (entry, is_cli) {
   if (is_cli === true) {
     get_dirname_in_node_modules()
@@ -26,7 +27,7 @@ module.exports = function (entry, is_cli) {
        get_dirname_in_parent()
     }
   }
-  
+
   var current_path = process.cwd();
   var f = path.resolve(current_path, '/bin/www')
 
@@ -35,13 +36,13 @@ module.exports = function (entry, is_cli) {
   } else {
     f = entry
   }
-  
+
   var is_exist = fs.existsSync(f)
-  
+
   if (is_exist === false) {
-    return console.log('runkoa entry file is not exist, please check it');
+    return console.error('runkoa entry file is not exist, please check it');
   }
-  
+
   require(f) // this is es7 - gets transpile
 }
 
@@ -54,24 +55,23 @@ function get_dirname_in_node_modules(){
     plugins: [path.resolve(dir, plugin_base + 'add-module-exports'), path.resolve(dir, plugin_base + 'transform-es2015-modules-commonjs')],
     presets: [path.resolve(dir, 'babel-preset-es2015-node5'), path.resolve(dir, 'babel-preset-stage-3')],
     babelrc: false
-  })  
+  })
 }
 
 function get_dirname_in_parent(){
   var dir =  __dirname.replace('runkoa', '')
-
   var plugin_base = 'babel-plugin-'
-  
+
   if(is_npm_v3 === true && process.env.RUNKOA_TEST){
     dir = path.resolve(dir, 'runkoa/node_modules/')
   }
-  
-  console.log('2babel presets path = ' + dir)
-  
+
+  debug('2babel presets path = ' + dir)
+
   // npm 2.x set babel in entry file
   require('babel-core/register')({
     plugins: [path.resolve(dir, plugin_base + 'add-module-exports'), path.resolve(dir, plugin_base + 'transform-es2015-modules-commonjs')],
     presets: [path.resolve(dir, 'babel-preset-es2015-node5'), path.resolve(dir, 'babel-preset-stage-3')],
     babelrc: false
-  }) 
+  })
 }

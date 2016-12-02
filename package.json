@@ -1,10 +1,10 @@
 {
   "name": "runkoa",
-  "version": "1.5.2",
+  "version": "1.5.6",
   "description": "run koa in any flow control(context, generator, async)",
   "main": "index.js",
   "scripts": {
-    "test": "RUNKOA_TEST=1 ./node_modules/.bin/mocha -u bdd --compilers js:babel-core/register",
+    "test": "RUNKOA_TEST=1 mocha -u bdd --compilers js:babel-core/register",
     "nodemon": "cd test && ../node_modules/.bin/nodemon test.js",
     "pub": "npm publish ."
   },
@@ -31,7 +31,8 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.7.4",
     "babel-polyfill": "^6.1.4",
     "babel-preset-es2015-node5": "^1.2.0",
-    "babel-preset-stage-3": "^6.5.0"
+    "babel-preset-stage-3": "^6.5.0",
+    "debug": "2.2.0"
   },
   "devDependencies": {
     "co": "^4.6.0",
